@@ -10,7 +10,7 @@
 
 const int TIME_STEP {32};
 const double weelRadius {0.02};
-const double axelLength {0.052};
+const double axleLength {0.052};
 
 int main(int argc, char **argv) {
 
@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
     double rightPosition {rightEncoder->getValue()};
     std::cout << leftPosition << " " << rightPosition << ' ';
     std::cout << (leftPosition + rightPosition) / 2 * weelRadius << ' ';
-    std::cout << (leftPosition - rightPosition) * weelRadius / axelLength << '\n';
+    std::cout << (leftPosition - rightPosition) * weelRadius / axleLength << '\n';
   }
   
   return 0;
