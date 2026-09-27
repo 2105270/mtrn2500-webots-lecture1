@@ -1,0 +1,54 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/CircleArena.proto"
+EXTERNPROTO "../protos/epuck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/factory/containers/protos/WoodenBox.proto"
+
+WorldInfo {
+  ERP 0.8
+}
+Viewpoint {
+  orientation -0.5247585794524714 0.5353625291412545 0.6618273156061961 1.9538248064065868
+  position 0.033872996108643326 -0.6329288712229574 2.619388387441534
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+CircleArena {
+  radius 0.7
+  floorTileSize 0.2 0.2
+}
+WoodenBox {
+  translation 0.32 0.17 0.05
+  size 0.1 0.1 0.1
+}
+WoodenBox {
+  translation -0.3 0.27 0.05
+  name "wooden box(1)"
+  size 0.1 0.1 0.1
+}
+WoodenBox {
+  translation -0.09 -0.24 0.05
+  name "wooden box(2)"
+  size 0.1 0.1 0.1
+}
+epuck {
+  controller "MyFirstControllerSln"
+  supervisor TRUE
+  turretSlot [
+    Lidar {
+      fieldOfView 6.28318
+      verticalFieldOfView 0.1
+      numberOfLayers 1
+    }
+  ]
+  groundSensorsSlot [
+    GPS {
+    }
+    Compass {
+    }
+  ]
+}
