@@ -8,40 +8,43 @@
 #include <webots/Motor.hpp>
 #include <webots/PositionSensor.hpp>
 
+#include <iostream>
+
 const int TIME_STEP {64};
 const double MAX_SPEED {6.28};
-const double weelRadius {0.02};
-const double axleLength {0.052};
+const double WHEEL_RADIUS {0.02};
+const double AXLE_LENGTH {0.052};
 
 int main(int argc, char **argv) {
-
   webots::Robot robot {};
   
-  webots::Motor *leftMotor {robot.getMotor("left wheel motor")};
-  webots::Motor *rightMotor {robot.getMotor("right wheel motor")};
+  webots::Motor* leftMotor {robot.getMotor("left wheel motor")};
+  webots::Motor* rightMotor {robot.getMotor("right wheel motor")};
   
-  // leftMotor->setPosition(10.0);
-  // rightMotor->setPosition(10.0);
-
-  leftMotor->setPosition(INFINITY);
-  rightMotor->setPosition(INFINITY);
-
-  leftMotor->setVelocity(0.1 * MAX_SPEED);
-  rightMotor->setVelocity(-0.1 * MAX_SPEED);
-  
-  webots::PositionSensor *leftEncoder {robot.getPositionSensor("left wheel sensor")};
-  webots::PositionSensor *rightEncoder {robot.getPositionSensor("right wheel sensor")};
+  webots::PositionSensor* leftEncoder {robot.getPositionSensor("left wheel sensor")};
+  webots::PositionSensor* rightEncoder {robot.getPositionSensor("right wheel sensor")};
   
   leftEncoder->enable(TIME_STEP);
   rightEncoder->enable(TIME_STEP);
   
-  while(robot.step(TIME_STEP) != -1) {
+  // leftMotor->setPosition(10.0);
+  // rightMotor->setPosition(10.0);
+  
+  leftMotor->setPosition(INFINITY);
+  rightMotor->setPosition(INFINITY);
+  
+  leftMotor->setVelocity(0.1 * MAX_SPEED);
+  rightMotor->setVelocity(-0.1 * MAX_SPEED);
+    
+    // robot.step(TIME_STEP);
+    // robot.step(TIME_STEP);
+  while (robot.step(TIME_STEP) != -1) {
     double leftPosition {leftEncoder->getValue()};
     double rightPosition {rightEncoder->getValue()};
-    std::cout << leftPosition << " " << rightPosition << ' ';
-    std::cout << (leftPosition + rightPosition) / 2 * weelRadius << ' ';
-    std::cout << (leftPosition - rightPosition) * weelRadius / axleLength << '\n';
-  }
-  
+    std::cout << leftPosition << ' ' << rightPosition << ' ';
+    std::cout << (rightPosition + leftPosition) * WHEEL_RADIUS / 2 << ' ';
+    std::cout << (rightPosition - leftPosition) * WHEEL_RADIUS / AXLE_LENGTH << '\n';
+  };
+
   return 0;
 }
