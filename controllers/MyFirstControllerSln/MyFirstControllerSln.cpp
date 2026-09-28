@@ -8,7 +8,8 @@
 #include <webots/Motor.hpp>
 #include <webots/PositionSensor.hpp>
 
-const int TIME_STEP {32};
+const int TIME_STEP {64};
+const double MAX_SPEED {6.28};
 const double weelRadius {0.02};
 const double axleLength {0.052};
 
@@ -19,8 +20,14 @@ int main(int argc, char **argv) {
   webots::Motor *leftMotor {robot.getMotor("left wheel motor")};
   webots::Motor *rightMotor {robot.getMotor("right wheel motor")};
   
-  leftMotor->setPosition(10);
-  rightMotor->setPosition(10);
+  // leftMotor->setPosition(10.0);
+  // rightMotor->setPosition(10.0);
+
+  leftMotor->setPosition(INFINITY);
+  rightMotor->setPosition(INFINITY);
+
+  leftMotor->setVelocity(0.1 * MAX_SPEED);
+  rightMotor->setVelocity(-0.1 * MAX_SPEED);
   
   webots::PositionSensor *leftEncoder {robot.getPositionSensor("left wheel sensor")};
   webots::PositionSensor *rightEncoder {robot.getPositionSensor("right wheel sensor")};
